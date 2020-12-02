@@ -1,0 +1,33 @@
+{
+  "name": "adventofcode2020",
+  "version": "1.0.0",
+  "description": "solutions to advent of code 2020",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RonakNisher/AdventOfCode2020.git"
+  },
+  "author": "ronak nisher",
+  "license": "ISC",
+  "prettier": {
+		"tabWidth": 4,
+		"singleQuote": true,
+		"printWidth": 120,
+		"useTabs": true
+	},
+  "dependencies": {
+    "ts-node": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.10",
+    "typescript": "^4.1.2",
+    "prettier": "2.0.5"
+  },
+  "bugs": {
+    "url": "https://github.com/RonakNisher/AdventOfCode2020/issues"
+  },
+  "homepage": "https://github.com/RonakNisher/AdventOfCode2020#readme"
+}

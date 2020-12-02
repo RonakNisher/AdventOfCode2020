@@ -1,0 +1,8 @@
+# electron HxAmple
+node_modules
+Out
+src/**/*.map
+yarn-error.log
+src/**/*.d.ts
+package-lock.json
+yarn.lock
