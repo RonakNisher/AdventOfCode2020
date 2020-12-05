@@ -36,20 +36,19 @@ export function isValueValid(data: string[]): boolean {
         }
 
         case hairColor: {
-            let byr: number = parseInt(data[1]);
-            let regExp = /[0-9a-f]/;
-            return (data[1].startsWith("#") && regExp.test(data[1].substr(1)));
+            let regExp = /^#[0-9a-f]{6}$/;
+            return regExp.test(data[1]);
         }
 
         case eyeColor: {
-
-            return (data[1] === "amb" || data[1] === "blu" || data[1] === "brn" || data[1] === "gry" || data[1] === "grn" || data[1] === "hzl" || data[1] === "oth" );
+            let regExp = /^(amb|blu|brn|gry|grn|hzl|oth)$/;
+            return regExp.test(data[1]);
         }
 
         case passportId: {
-            let regExp = /[0-9]/;
+            let regExp = /^[0-9]{9}$/;
 
-            return (data[1].length === 9 && regExp.test(data[1]));
+            return regExp.test(data[1]);
         }
     }
 
