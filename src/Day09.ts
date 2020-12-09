@@ -1,10 +1,8 @@
 import {loadFile} from "./Utils";
 
 export function checkIfValid(start: number, sum: number): boolean {
-    // console.log("sum ", sum);
     for (let i: number = 0; i < preambleLength - 1; i++) {
         for (let j: number = i + 1; j < preambleLength; j++) {
-            // console.log(instructions[start + i] +  " + " + instructions[start + j]);
             if (sum === instructions[start + i] + instructions[start + j]) {
                 return true;
             }
@@ -13,41 +11,24 @@ export function checkIfValid(start: number, sum: number): boolean {
     return false;
 }
 
-export function getContiguousNumbers(sum: number) : number[] {
-    let contiguous: number[] = [];
+export function getContiguousNumbers(sum: number) : number {
 
     let currentStart: number = 0;
-    let currentStartValue: number = instructions[0];
-    let currentEnd: number = 1;
-    let currentSum: number = instructions[0] + instructions[1]; 
-    contiguous.push(instructions[0]);
-    contiguous.push(instructions[1]);
-    currentEnd++;
+    let currentEnd: number = 0;
+    let currentSum: number = 0; 
     
     while (true) {
         if (currentSum === sum) {
-            break;
+            const contiguousReults: number[] = instructions.slice(currentStart, currentEnd);
+            return Math.min(...contiguousReults) + Math.max(...contiguousReults);
         }
         else if (currentSum < sum) {
-            contiguous.push(instructions[currentEnd]);
-            currentSum += instructions[currentEnd];
+            currentSum += instructions[currentEnd++];
         }
         else {
-            currentSum = 0;
-            currentStart++;
-            currentEnd = currentStart + 1;
-            currentStartValue = instructions[currentStart];
-            currentSum = currentStartValue + instructions[currentEnd];
-
-            contiguous = [];
-            contiguous.push(currentStartValue);
-            contiguous.push(instructions[currentEnd]);
+            currentSum-=instructions[currentStart++]; 
         }
-        
-        currentEnd++;
     }
-
-    return contiguous.sort((a, b) => a - b);
 }
 
 
@@ -74,8 +55,7 @@ for (let start: number = preambleLength; start < instructions.length; start++) {
 }
 
 // part 2
-let contiguousReults: number[] = getContiguousNumbers(part1);
-part2 = contiguousReults[0] + contiguousReults[contiguousReults.length - 1];
+part2 = getContiguousNumbers(part1);
 
 console.log("********************************************");
 console.log("Part 1: ", part1);
