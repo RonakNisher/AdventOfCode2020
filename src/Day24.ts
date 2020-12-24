@@ -1,75 +1,5 @@
 import { loadFile } from "./Utils";
 
-const compressedDirectionMap: Map<string, string> = new Map<string, string>();
-
-// directions are e, w, se, sw, ne, nw
-// back to itself
-compressedDirectionMap.set(",e,sw,nw,",","); // 1,2,3,1
-compressedDirectionMap.set(",se,w,ne,",","); // 1,3,4,1
-compressedDirectionMap.set(",sw,nw,e,",","); // 1,4,5,1
-compressedDirectionMap.set(",w,ne,se,",","); // 1,5,6,1
-compressedDirectionMap.set(",nw,e,sw,",","); // 1,6,7,1
-compressedDirectionMap.set(",ne,se,w,",","); // 1,7,2,1
-
-compressedDirectionMap.set(",se,ne,w,", ","); // 1,3,2,1
-compressedDirectionMap.set(",sw,e,nw,", ","); // 1,4,3,1
-compressedDirectionMap.set(",w,se,ne,", ","); // 1,5,4,1
-compressedDirectionMap.set(",nw,sw,e,", ","); // 1,6,5,1
-compressedDirectionMap.set(",ne,w,se,", ","); // 1,7,6,1
-compressedDirectionMap.set(",e,nw,sw,", ","); // 1,2,7,1
-
-// opposite direction
-compressedDirectionMap.set("ew","");
-compressedDirectionMap.set("we","");
-compressedDirectionMap.set("nwse","");
-compressedDirectionMap.set("senw","");
-compressedDirectionMap.set("nesw","");
-compressedDirectionMap.set("swne","");
-
-compressedDirectionMap.set(",e,w,", ",");
-compressedDirectionMap.set(",w,e,", ",");
-compressedDirectionMap.set(",nw,se,", ",");
-compressedDirectionMap.set(",se,nw,", ",");
-compressedDirectionMap.set(",ne,sw,", ",");
-compressedDirectionMap.set(",sw,ne,", ",");
-
-// Not to self
-// roundabout directions
-compressedDirectionMap.set(",e,se,w,", ",se,"); // 1,2,x,3 -> 1,3
-compressedDirectionMap.set(",se,sw,nw,", ",sw,"); // 1,3,x,4 -> 1,4
-compressedDirectionMap.set(",sw,w,ne,", ",w,"); // 1,4,x,5 -> 1,5
-compressedDirectionMap.set(",w,nw,e,", ",nw,"); // 1,5,x,6 -> 1,6
-compressedDirectionMap.set(",nw,ne,se,", ",ne,"); // 1,6,x,7 -> 1,7
-compressedDirectionMap.set(",ne,e,sw,", ",e,"); // 1,7,x,2 -> 1,2
-
-compressedDirectionMap.set(",se,e,nw,", ",e,"); // 1,3,x,2 -> 1,2
-compressedDirectionMap.set(",sw,se,ne,", ",se,"); // 1,4,x,3 -> 1,3
-compressedDirectionMap.set(",w,sw,e,", ",sw,"); // 1,5,x,4 -> 1,4
-compressedDirectionMap.set(",nw,w,se,", ",w,"); // 1,6,x,5 -> 1,5
-compressedDirectionMap.set(",ne,nw,sw,", ",nw,"); // 1,7,x,6 -> 1,6
-compressedDirectionMap.set(",e,ne,w,", ",ne,"); // 1,2,x,7 -> 1,7
-
-// 2 direction around the center
-compressedDirectionMap.set(",e,sw,", ",se,"); // 1,2,3 -> 1,3
-compressedDirectionMap.set(",se,w,", ",sw,"); // 1,3,4 -> 1,4
-compressedDirectionMap.set(",sw,nw,", ",w,"); // 1,4,5 -> 1,5
-compressedDirectionMap.set(",w,ne,", ",nw,"); // 1,5,6 -> 1,6
-compressedDirectionMap.set(",nw,e,", ",ne,"); // 1,6,7 -> 1,7
-compressedDirectionMap.set(",ne,se,", ",e,"); // 1,7,2 -> 1,2
-
-compressedDirectionMap.set(",sw,ne", ",e,"); // 1,3,2 -> 1,2
-compressedDirectionMap.set(",sw,e,", ",se,"); // 1,4,3 -> 1,3
-compressedDirectionMap.set(",w,se,", ",sw,"); // 1,5,4 -> 1,4
-compressedDirectionMap.set(",nw,sw,", ",w,"); // 1,6,5 -> 1,5
-compressedDirectionMap.set(",ne,w,", ",nw,"); // 1,7,6 -> 1,6
-compressedDirectionMap.set(",e,nw,", ",ne,"); // 1,2,7 -> 1,7
-
-
-compressedDirectionMap.set(",sw,w,nw,", ",w,w,");
-compressedDirectionMap.set(",nw,w,sw,", ",w,w,");
-compressedDirectionMap.set(",ne,e,se,", ",e,e,");
-compressedDirectionMap.set(",se,e,ne,", ",e,e,");
-
 let directionMap: Map<string, number[]> = new Map<string, number[]>();
 directionMap.set("e", [1,0]);
 directionMap.set("w", [-1,0]);
@@ -86,7 +16,6 @@ export function compressPath(path: string) : string {
     let currentX: number = 0;
     let currentY: number = 0;
 
-    let result: string = path;
     for (let i = 0; i <  path.length;) {
         let currentChar = path.charAt(i);
         let nextDirection: string = "";
@@ -106,7 +35,6 @@ export function compressPath(path: string) : string {
     }
 
     return [currentX, currentY].join(",");
-
 }
 
 let part1: number = 0;
